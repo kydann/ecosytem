@@ -1,0 +1,35 @@
+variables:
+  eureka:
+    host: registry
+    port: 8761
+    
+logging:
+  level:
+    org.springframework.web: INFO
+    com.citibanamex.bne: INFO
+    
+tuxedo:
+  destination: BNE
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+eureka:
+  instance:
+    prefer-ip-address: false
+  client:
+    serviceUrl:
+      defaultZone: http://${variables.eureka.host}:${variables.eureka.port}/eureka/
+
+jdbc:
+  name: jdbc-server
+  url: http://204.236.205.70/bancanet-db-sql-server
+  uri:
+    read: /v1/query
+    write: /v1/update
+

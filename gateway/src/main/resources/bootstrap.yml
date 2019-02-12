@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: gateway
+  config:
+    name: gateway
+  cloud:
+    config:
+      uri: http://config:8888
+      fail-fast: true
+      password: ${CONFIG_SERVICE_PASSWORD}
+      username: user
+#Zuul routes active    
+zuul: 
+  routes:
+    citi: 
+      path: /citi/**
+      serviceId: citi
+#Server Port
+server:
+  port: 8080
+
+#Endpoints 
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+#Eureka Instance ID
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${server.port}    
+
+#Ribbon Activation
+ribbon:
+ eureka:
+  enabled: true

@@ -1,0 +1,39 @@
+version: '2.1'
+services:
+  config:
+    environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    build: config
+    ports:
+      - 8888:8888
+
+  registry:
+    environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    depends_on:
+      config:
+        condition: service_healthy
+    build: registry
+    ports:
+      - 8761:8761
+
+  gateway:
+    environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    depends_on:
+      config:
+        condition: service_healthy
+    build: gateway
+    ports: 
+      - 8080:8080
+
+  jdbc-server:
+    environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    depends_on:
+      config:
+        condition: service_healthy
+    build: jdbc-server
+    ports:
+      - 4000:4000
+

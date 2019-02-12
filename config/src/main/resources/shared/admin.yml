@@ -1,0 +1,22 @@
+server:
+  port: 7777
+
+info:
+  component: admin
+
+logging:
+  file: admin.log
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 350
+      maximumSize: 350
+      maxQueueSize: -1
+      queueSizeRejectionThreshold: 20
+      allowMaximumSizeToDivergeFromCoreSize: true
+
+feign:
+  hystrix:
+    enabled: true
+

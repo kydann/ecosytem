@@ -1,0 +1,44 @@
+server:
+  port: 4000
+    
+info:
+  component: JDBC Server Service for SQL Server Connection
+  
+logging:
+  file: jdbc-server.log
+  
+#db:
+#  driverClass: oracle.jdbc.OracleDriver
+#  jdbcUrl: jdbc:oracle:thin:@localhost:1521:xe
+#  ef:
+#    user: System
+#    password: admin
+    
+db:
+  driverClass: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jdbcUrl: jdbc:sqlserver://204.236.205.70;databaseName=BNE
+  ef:
+    user: sa
+    password: Ap4che01
+    
+hystrix:
+  threadpool:
+    default:
+      coreSize: 350
+      maximumSize: 350
+      maxQueueSize: -1
+      queueSizeRejectionThreshold: 20
+      
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+ 
+c3p0.minPoolSize: 4
+c3p0.maxPoolSize: 20
+c3p0.acquireIncrement: 2
+c3p0.breakAfterAcquireFailure: false
+c3p0.maxIdleTime: 10   
+  

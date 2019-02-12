@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: citijpa
+  config:
+    name: citijpa
+  cloud:
+    config:
+      uri: http://config:8888
+      fail-fast: true
+      password: ${CONFIG_SERVICE_PASSWORD}
+      username: user
+#sqlserver
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;databaseName=jpa
+    username: sa
+    password: root123.
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate: 
+        dialect: org.hibernate.dialect.SQLServer2008Dialect
+    
+#Component Info  PARTIR DE AQUI SE AGREGO
+info:
+  component: Public-RestService
+
+#Port - If 0 get random port
+server: 
+ port: 9090 
+ ##aqui podria ser
+
+#Eureka Instance ID
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+  
+#Service Registration Method  
+cloud:
+ services:
+  registrationMethod: route
+  
+#Disable HTTP Basic Authentication
+security:
+  basic:
+    enabled: false
+    

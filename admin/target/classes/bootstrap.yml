@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: admin
+  config:
+    name: admin
+  cloud:
+    config:
+      uri: http://config:8888
+      fail-fast: true
+      password: ${CONFIG_SERVICE_PASSWORD}
+      username: user
+  security:
+    user:
+      name: admin
+      password: admin
+  mail:
+    host: localhost
+    username: smtp-server-user
+    password: smtp-server-password
+  boot:
+    admin:
+      notify:
+        mail:
+          from: 
+          to:
+          - kydann.2907@gmail.com
+          cc:
+          - deejaychrizz@gmail.com
+server:
+  port: 2324
+  
+    
+    
